@@ -1,15 +1,16 @@
 import React from 'react';
-import './index.css'
+import Btn from './btn';
+import '../index.css'
 
-function Btn() {
+function Btn_lst(props) {
     return (
-        <div className="btn">
-            info
+        <div className="btn_lst">
+            <Btn content="info"></Btn>
         </div>
 
     )
 }
-export default Btn
+export default Btn_lst
 
 // export default Action_bar
 // const btn_lst = props => (

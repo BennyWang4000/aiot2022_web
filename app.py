@@ -56,7 +56,7 @@ socketio = SocketIO(app)
 #         {"response": "ok"}
 #     )
 
-@socketio.on('send')
+@socketio.on('count')
 def emit_count(count):
     socketio.emit('count', count)
 
@@ -65,6 +65,11 @@ def emit_count(count):
 def home():
     return render_template('index.html')
     # return render_template('static/index.html', async_mode=socketio.async_mode)
+
+
+@app.route("/babylon_render.js")
+def babylon_render():
+    return render_template('babylon_render.js')
 
 
 def counting():
@@ -79,5 +84,5 @@ count_thread = threading.Thread(target=counting)
 count_thread.start()
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port="5566")
     # socketio.run(app)

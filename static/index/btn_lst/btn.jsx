@@ -16,7 +16,7 @@ function Btn(props) {
                         const element = document.getElementById("${props.idName}");
                         var socket = io.connect();
                         socket.on('temp', function (temp) {
-                            element.innerHTML= "temp: "+ temp.toString()+ "\n";
+                            element.innerHTML= "temp: "+ temp.toString()+ "\";
                         });
                         socket.on('humi', function (humi) {
                             element.innerHTML= "humi"+ humi.toString();

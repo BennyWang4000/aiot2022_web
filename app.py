@@ -1,3 +1,7 @@
+'''iptables
+iptables -I INPUT -j ACCEPT
+'''
+
 import sys
 import time
 import threading
@@ -14,7 +18,7 @@ app.register_blueprint(app_status)
 app.register_blueprint(app_info)
 
 blueprint = Blueprint('blueprint', __name__)
-app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = 'nutcadmin5566'
 socketio = SocketIO(app)
 
 temp = 0.0
@@ -36,19 +40,19 @@ def emit_count(count):
     socketio.emit('count', count)
 
 
-@app.route("/", methods=['POST'])
-def setTempHumi():
-    request_data = request.get_json()
-    if request_data['password'] == 'nutcadmin5566':
-        temp = request_data['temp']
-        humi = request_data['humi']
-        emit_temp(temp)
-        emit_humi(humi)
-        flash('correct password', 'info')
-        return jsonify({'code': 200})
-    else:
-        flash('wrong password', 'warning')
-        return jsonify({'code': 400})
+# @app.route("/", methods=['POST'])
+# def setTempHumi():
+#     request_data = request.get_json()
+#     if request_data['password'] == 'nutcadmin5566':
+#         temp = request_data['temp']
+#         humi = request_data['humi']
+#         emit_temp(temp)
+#         emit_humi(humi)
+#         flash('correct password', 'info')
+#         return jsonify({'code': 200})
+#     else:
+#         flash('wrong password', 'warning')
+#         return jsonify({'code': 400})
 
 
 @app.route("/")
@@ -63,6 +67,8 @@ def counting():
         time.sleep(5)
         print(count, file=sys.stderr)
         emit_count(count)
+        emit_humi(1.0)
+        emit_temp(5.0)
 
 
 count_thread = threading.Thread(target=counting)

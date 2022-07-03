@@ -2,7 +2,7 @@ import React from 'react';
 import Btn from './btn';
 import '../index.css'
 
-function Btn_lst(props) {
+function Btn_lst() {
     return (
         <div className="btn_lst">
             <Btn idName="info"></Btn>

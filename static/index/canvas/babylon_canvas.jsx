@@ -1,8 +1,75 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../index.css';
 import { Helmet } from "react-helmet";
 
+
+// class Babylon_canvas_component extends React.Component {
+//     componentDidMount() {
+//         const script = document.createElement("script");
+
+//         script.src = "./babylon_2.js";
+//         script.async = true;
+
+//         document.body.appendChild(script);
+//     }
+
+//     render() {
+//         return (
+//             <script>
+
+//             </script>
+//         );
+//     }
+// }
+
+// function Babylon_canvas() {
+//     function handleLoadScript() {
+//         import('./babylon_render')
+//             .then(({ functionFromModule }) => {
+//                 socket_on()
+//             })
+//             .catch(err => {
+//                 // Handle failure
+//             });
+//     };
+
+//     return (
+//         <div className='babylon_canvas'></div>
+//     )
+// }
+// export default Babylon_canvas
+
+
 function Baylon_canvas() {
+    // const status = userScript(
+    //     './babylon.js'
+    // )
+    // function userScript(src) {
+    //     const [status, setStatus] = React.useState(src ? "loading" : "idle");
+    //     useEffect(() => {
+    //         if (!src) {
+    //             setStatus("idle");
+    //             return;
+    //         }
+    //         let script = document.querySelector(`script[src="${src}";]`);
+    //         if (!script) {
+    //             const scriptTag = document.createElement('script');
+
+    //             // scriptTag.src = "./babylon_render.js";
+    //             scriptTag.type = "module";
+    //             scriptTag.async = true;
+
+    //             document.body.appendChild(scriptTag);
+    //             return () => {
+    //                 documnet.body.removeChild(scriptTag)
+    //             }
+    //         }
+
+
+    //     }, []);
+    // }
+    // // // });
+
     return (
         <div>
             <canvas id="babylon_canvas" className='babylon_canvas'>
@@ -162,18 +229,18 @@ function Baylon_canvas() {
                                     "but3", "籃球場內\
                                     人數: "+ count+ "\
                                     擁擠程度: 普通");
-                                btn_round.width = 1;
-                                btn_round.height = 0.4;
-                                btn_round.color = "white";
-                                btn_round.fontSize = 70;
-                                btn_round.background = "green";
-                                btn_round.onPointerUpObservable.add(function () {
-                                    alert("you did it!");
-                                            });
-                                texture_round.addControl(btn_round);
+                    btn_round.width = 1;
+                    btn_round.height = 0.4;
+                    btn_round.color = "white";
+                    btn_round.fontSize = 70;
+                    btn_round.background = "green";
+                    btn_round.onPointerUpObservable.add(function () {
+                        alert("you did it!");
+                                });
+                    texture_round.addControl(btn_round);
+
                             });
-                        });
-                    `}
+                        });`}
                 </script>
             </Helmet>
         </div>

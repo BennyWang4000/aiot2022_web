@@ -1,22 +1,19 @@
+'''iptable
+iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+iptables -I INPUT -j ACCEPT
+'''
+
 import sys
 import time
 import threading
 import random
-from flask import Flask, Blueprint, request, abort, render_template, jsonify
+from flask import Flask, Blueprint, request, abort, render_template, jsonify, flash
 from flask_socketio import SocketIO, emit
 
 import json
 from views.status.status import app_status
 from views.info.info import app_info
-
-'''
-TODO    
-    - babylon.js nullengine
-    - babylon.js load obj n mtl
-    - websocket
-    - oracle cloud
-    - frontend ui
-'''
 # count = 80
 
 app = Flask(__name__)
@@ -24,7 +21,7 @@ app.register_blueprint(app_status)
 app.register_blueprint(app_info)
 
 blueprint = Blueprint('blueprint', __name__)
-app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = 'nutcadmin5566'
 socketio = SocketIO(app)
 
 
@@ -55,11 +52,34 @@ socketio = SocketIO(app)
 #     return jsonify(
 #         {"response": "ok"}
 #     )
+temp= 0.0
+humi= 0.0
+
+@app.route("/", methods=['POST'])
+def setTempHumi():
+    request_data = request.get_json()
+    if request_data['password'] == 'nutcadmin5566':
+        temp= request_data['temp']
+        humi= request_data['humi']
+        emit_temp(temp)
+        emit_humi(humi)
+        flash('correct password', 'info')
+        return jsonify({'code': 200})
+    else:
+        flash('wrong password', 'warning')
+        return jsonify({'code': 400})
 
 @socketio.on('count')
 def emit_count(count):
     socketio.emit('count', count)
 
+@socketio.on('temp')
+def emit_temp(temp):
+    socketio.emit('temp', temp)
+
+@socketio.on('humi')
+def emit_humi(humi):
+    socketio.emit('humi', humi)
 
 @app.route("/")
 def home():

@@ -5,9 +5,8 @@ import '../index.css'
 function Btn_lst(props) {
     return (
         <div className="btn_lst">
-            <Btn content="info"></Btn>
+            <Btn idName="info"></Btn>
         </div>
-
     )
 }
 export default Btn_lst

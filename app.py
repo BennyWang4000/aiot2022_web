@@ -2,22 +2,12 @@ import sys
 import time
 import threading
 import random
-from flask import Flask, Blueprint, request, abort, render_template, jsonify
+from flask import Flask, Blueprint, request, abort, render_template, jsonify, flash
 from flask_socketio import SocketIO, emit
 
 import json
 from views.status.status import app_status
 from views.info.info import app_info
-
-'''
-TODO    
-    - babylon.js nullengine
-    - babylon.js load obj n mtl
-    - websocket
-    - oracle cloud
-    - frontend ui
-'''
-# count = 80
 
 app = Flask(__name__)
 app.register_blueprint(app_status)
@@ -27,49 +17,44 @@ blueprint = Blueprint('blueprint', __name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-
-# @app.route("")
-# @app.route('')
-# def get_court():
+temp = 0.0
+humi = 0.0
 
 
-# @app.route('/count', methods=['GET'])
-# def get_count():
-#     return jsonify({
-#         'count': count
-#     })
+@socketio.on('temp')
+def emit_temp(temp):
+    socketio.emit('temp', temp)
 
 
-# @app.route("/count", methods=['GET'])
+@socketio.on('humi')
+def emit_humi(humi):
+    socketio.emit('humi', humi)
 
-# @socketio.on('send')
-# def upload():
-#     if not request.json:
-#         abort(400)
-
-#     d = request.json.get("data", 0)
-#     print("receive data:{}".format(d))
-
-
-#     socketio.emit('status_response', {'count': count})
-#     return jsonify(
-#         {"response": "ok"}
-#     )
 
 @socketio.on('count')
 def emit_count(count):
     socketio.emit('count', count)
 
 
+@app.route("/", methods=['POST'])
+def setTempHumi():
+    request_data = request.get_json()
+    if request_data['password'] == 'nutcadmin5566':
+        temp = request_data['temp']
+        humi = request_data['humi']
+        emit_temp(temp)
+        emit_humi(humi)
+        flash('correct password', 'info')
+        return jsonify({'code': 200})
+    else:
+        flash('wrong password', 'warning')
+        return jsonify({'code': 400})
+
+
 @app.route("/")
 def home():
     return render_template('index.html')
     # return render_template('static/index.html', async_mode=socketio.async_mode)
-
-
-@app.route("/babylon_render.js")
-def babylon_render():
-    return render_template('babylon_render.js')
 
 
 def counting():

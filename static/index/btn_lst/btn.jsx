@@ -5,7 +5,7 @@ import '../index.css'
 
 function Btn(props) {
     return (
-        <div>
+        <div style={{ float: "left" }}>
             <div id={props.idName} className="btn">
 
             </div>
@@ -15,15 +15,12 @@ function Btn(props) {
                     $(document).ready(function () {
                         const element = document.getElementById("${props.idName}");
                         var socket = io.connect();
-                        socket.on('temp', function (data) {
+                        socket.on('${props.ioType}', function (data) {
                             var obj = JSON.parse(data)
-                            console.log(data); 
-                            element.innerHTML= "temp: "+ obj.temp+ "\
-                            humi: "+ obj.humi;
+                            // console.log(data); 
+                            element.innerHTML= "${props.ioType}:\
+                               "+ data;
                         });
-                        // socket.on('humi', function (humi) {
-                        //     element.innerHTML= "humi"+ humi.toString();
-                        // });
                     });
                     `}
                 </script>

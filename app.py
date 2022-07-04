@@ -28,7 +28,7 @@ socketio = SocketIO(app)
 print('connecting...')
 conn = pymssql.connect(
     host='localhost',
-		# localhost:3306
+    # localhost:3306
     user='root',
     password='050610AIoT',
     database='test_database',
@@ -40,17 +40,23 @@ print('connected!')
 temp = 0.0
 humi = 0.0
 
+
+# @socketio.on('temp')
+# def emit_temp(temp, humi):
+#     j = json.dumps({'temp': temp, 'humi': humi})
+#     print(j, file=sys.stderr)
+#     socketio.emit('temp', json.dumps(
+#         {'temp': temp, 'humi': humi}))
+
+
 @socketio.on('temp')
-def emit_temp(temp, humi):
-    j = json.dumps({'temp': temp, 'humi': humi})
-    print(j, file=sys.stderr)
-    socketio.emit('temp', json.dumps(
-        {'temp': temp, 'humi': humi}))
+def emit_temp(temp):
+    socketio.emit('temp', temp)
 
 
-# @socketio.on('humi')
-# def emit_humi(humi):
-#     socketio.emit('humi', humi)
+@socketio.on('humi')
+def emit_humi(humi):
+    socketio.emit('humi', humi)
 
 
 @socketio.on('count')
@@ -65,18 +71,17 @@ def setTempHumi():
         count = 80 + random.randint(-10, 10)
         temp = request_data['temp']
         humi = request_data['humi']
-        emit_temp(temp, humi)
-        now= datetime.datetime.now()
+        emit_temp(temp)
+        emit_humi(humi)
+        now = datetime.datetime.now()
 
-        cusor.execute(f'insert into test_table(set_time, people_flow, temp, humidity, air_quality) values ({now}, {count}, {temp}, {humi}, -1)')
+        cursor.execute(
+            f'insert into test_table(set_time, people_flow, temp, humidity, air_quality) values ({now}, {count}, {temp}, {humi}, -1)')
 
         # emit_humi(humi)
         return jsonify({'code': 200})
     else:
         return jsonify({'code': 400})
-
-
-
 
 
 @app.route("/")
@@ -88,10 +93,13 @@ def home():
 # def counting():
 #     while True:
 #         time.sleep(5)
-#         print(count, file=sys.stderr)
+#         count = 80 + random.randint(-10, 10)
+#         temp = 80 + random.randint(-10, 10)
+#         humi = 80 + random.randint(-10, 10)
+#         print(count, temp, humi, file=sys.stderr)
 #         emit_count(count)
-#         # emit_humi(humi)
-#         # emit_temp(30, 50)
+#         emit_humi(humi)
+#         emit_temp(temp)
 
 
 # count_thread = threading.Thread(target=counting)

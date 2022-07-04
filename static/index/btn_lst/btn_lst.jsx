@@ -4,8 +4,12 @@ import '../index.css'
 
 function Btn_lst() {
     return (
-        <div className="btn_lst">
-            <Btn idName="info"></Btn>
+        <div className='btn_ctnr'>
+            <ul className='btn_lst'>
+                <li style={{ display: "inline" }}><Btn idName="btn_temp" ioType="temp"></Btn></li>
+                <li style={{ display: "inline" }}><Btn idName="btn_humi" ioType="humi"></Btn></li>
+                {/* <li style={{ display: "inline" }}><a className='action_nav_btn'>About</a></li> */}
+            </ul>
         </div>
     )
 }

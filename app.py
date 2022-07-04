@@ -67,8 +67,8 @@ def counting():
         time.sleep(5)
         print(count, file=sys.stderr)
         emit_count(count)
-        emit_humi(1.0)
-        emit_temp(5.0)
+        emit_humi(humi)
+        emit_temp(temp)
 
 
 count_thread = threading.Thread(target=counting)

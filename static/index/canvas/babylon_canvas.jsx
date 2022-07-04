@@ -122,10 +122,10 @@ function Baylon_canvas() {
                         camera.maxZ = 50000
                         var court = BABYLON.SceneLoader.ImportMesh("",
                             "https://raw.githubusercontent.com/BennyWang4000/SWMGglb/main/", "court01_non_flicker.glb", scene, function (newMeshes) {
-                                scene.newMeshes.forEach((m) => {
-                                    m.isPickable = false;
-                                    m.alphaModel = 1;
-                                });
+                                // scene.newMeshes.forEach((m) => {
+                                //     m.isPickable = false;
+                                //     m.alphaModel = 1;
+                                // });
                             }
                         );
                     

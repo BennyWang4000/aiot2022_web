@@ -10,7 +10,8 @@ from flask_socketio import SocketIO, emit
 import json
 
 import datetime
-import pymssql
+import pandas as pd
+import pyodbc
 
 from views.status.status import app_status
 from views.info.info import app_info
@@ -25,17 +26,23 @@ app.config['SECRET_KEY'] = 'nutcadmin5566'
 socketio = SocketIO(app)
 
 
-print('connecting...')
-conn = pymssql.connect(
-    host='localhost',
-    # localhost:3306
-    user='root',
-    password='050610AIoT',
-    database='test_database',
-    charset='big5'
-)
-cursor = conn.cursor(as_dict=True)
-print('connected!')
+server = 'localhost'
+database = 'test_database'
+username = 'root'
+password = '050610AIoT'
+print("connecting.......")
+connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
+                            server+';DATABASE='+database+';UID='+username+';PWD=' + password + ';Trusted_Connection=no;')
+cursor = connection.cursor()
+
+print("connected!")
+sql= 'select * from test_table'
+cursor.execute(sql)
+
+df = pd.DataFrame.from_records(cursor.fetchall(), columns=[
+                                col[0] for col in cursor.description])
+print(df)
+
 
 temp = 0.0
 humi = 0.0

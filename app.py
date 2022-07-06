@@ -36,11 +36,11 @@ connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
 cursor = connection.cursor()
 
 print("connected!")
-sql= 'select * from test_table'
+sql = 'select * from test_table'
 cursor.execute(sql)
 
 df = pd.DataFrame.from_records(cursor.fetchall(), columns=[
-                                col[0] for col in cursor.description])
+    col[0] for col in cursor.description])
 print(df)
 
 
@@ -66,6 +66,11 @@ def emit_humi(humi):
     socketio.emit('humi', humi)
 
 
+@socketio.on('pm')
+def emit_pm(pm):
+    socketio.emit('pm', pm)
+
+
 @socketio.on('count')
 def emit_count(count):
     socketio.emit('count', count)
@@ -78,12 +83,14 @@ def setTempHumi():
         count = 80 + random.randint(-10, 10)
         temp = request_data['temp']
         humi = request_data['humi']
+        pm = request_data['pm']
         emit_temp(temp)
         emit_humi(humi)
+        emit_pm(pm)
         now = datetime.datetime.now()
 
         cursor.execute(
-            f'insert into test_table(set_time, people_flow, temp, humidity, air_quality) values ({now}, {count}, {temp}, {humi}, -1)')
+            f'insert into test_table(set_time, people_flow, temp, humidity, air_quality) values ({now}, {count}, {temp}, {humi}, {pm})')
 
         # emit_humi(humi)
         return jsonify({'code': 200})

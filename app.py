@@ -84,6 +84,7 @@ def setTempHumi():
         temp = request_data['temp']
         humi = request_data['humi']
         pm = request_data['pm']
+        emit_count(count)
         emit_temp(temp)
         emit_humi(humi)
         emit_pm(pm)

@@ -8,7 +8,7 @@ function Btn_lst() {
             <ul className='btn_lst'>
                 <li style={{ display: "inline" }}><Btn idName="btn_temp" ioType="temp"></Btn></li>
                 <li style={{ display: "inline" }}><Btn idName="btn_humi" ioType="humi"></Btn></li>
-                <li style={{ display: "inline" }}><Btn idName="btn_humi" ioType="pm"></Btn></li>
+                <li style={{ display: "inline" }}><Btn idName="btn_pm" ioType="pm"></Btn></li>
             </ul>
         </div>
     )

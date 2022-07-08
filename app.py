@@ -11,7 +11,7 @@ import json
 
 import datetime
 import pandas as pd
-import pyodbc
+import mysql.connector
 
 from views.status.status import app_status
 from views.info.info import app_info
@@ -30,18 +30,15 @@ server = 'localhost'
 database = 'test_database'
 username = 'root'
 password = '050610AIoT'
+
 print("connecting.......")
-connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-                            server+';DATABASE='+database+';UID='+username+';PWD=' + password + ';Trusted_Connection=no;')
+connection = mysql.connector.connect(
+    host=server,
+    database=database,
+    user=username,
+    password=password)
 cursor = connection.cursor()
-
 print("connected!")
-sql = 'select * from test_table'
-cursor.execute(sql)
-
-df = pd.DataFrame.from_records(cursor.fetchall(), columns=[
-    col[0] for col in cursor.description])
-print(df)
 
 
 temp = 0.0
@@ -84,16 +81,22 @@ def setTempHumi():
         temp = request_data['temp']
         humi = request_data['humi']
         pm = request_data['pm']
+        count= request_data['count']
         emit_count(count)
         emit_temp(temp)
         emit_humi(humi)
         emit_pm(pm)
-        now = datetime.datetime.now()
+        # now = datetime.datetime.now().strftime("%Y-%m/%d")
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(now)
+        sql= 'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)'
+        sql= sql.replace("'", '')
+        # s= 'Stadium'
+        cursor.execute('insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
+        
+        cursor.execute(f'select * from Stadium')
+        print(cursor.fetchall())
 
-        cursor.execute(
-            f'insert into test_table(set_time, people_flow, temp, humidity, air_quality) values ({now}, {count}, {temp}, {humi}, {pm})')
-
-        # emit_humi(humi)
         return jsonify({'code': 200})
     else:
         return jsonify({'code': 400})

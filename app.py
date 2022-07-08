@@ -51,6 +51,14 @@ humi = 0.0
 #     print(j, file=sys.stderr)
 #     socketio.emit('temp', json.dumps(
 #         {'temp': temp, 'humi': humi}))
+@socketio.on('all')
+def emit_all(count, temp, humi, pm):
+    socketio.emit(json.dumps({
+        'count': count,
+        'temp': temp,
+        'humi': humi,
+        'pm': pm
+    }))
 
 
 @socketio.on('temp')
@@ -81,19 +89,21 @@ def setTempHumi():
         temp = request_data['temp']
         humi = request_data['humi']
         pm = request_data['pm']
-        count= request_data['count']
-        emit_count(count)
-        emit_temp(temp)
-        emit_humi(humi)
-        emit_pm(pm)
+        count = request_data['count']
+        emit_all(count, temp, humi, pm)
+        # emit_count(count)
+        # emit_temp(temp)
+        # emit_humi(humi)
+        # emit_pm(pm)
         # now = datetime.datetime.now().strftime("%Y-%m/%d")
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(now)
-        sql= 'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)'
-        sql= sql.replace("'", '')
+        sql = 'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)'
+        sql = sql.replace("'", '')
         # s= 'Stadium'
-        cursor.execute('insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
-        
+        cursor.execute(
+            'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
+
         cursor.execute(f'select * from Stadium')
         print(cursor.fetchall())
 

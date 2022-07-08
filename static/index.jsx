@@ -15,8 +15,8 @@ action_bar.render(<Action_bar />);
 const babylon_canvas = createRoot(document.getElementById('babylon_ctnr'))
 babylon_canvas.render(<Babylon_canvas />);
 
-const btn_lst = createRoot(document.getElementById('btn_ctnr'));
-btn_lst.render(<Btn_lst />)
+// const btn_lst = createRoot(document.getElementById('btn_ctnr'));
+// btn_lst.render(<Btn_lst />)
 
 
 // const chat = createRoot(document.getElementById('telegram'))

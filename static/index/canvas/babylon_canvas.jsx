@@ -226,10 +226,10 @@ function Baylon_canvas() {
                             texture_round.removeControl(btn_round)
                             btn_round = BABYLON.GUI.Button.CreateSimpleButton(
                                 "but3", "籃球場內\
-                                人數: "+ obj.count+ "\
-                                溫度: "+ obj.temp+ "\
-                                濕度: "+ obj.humi+ "\
-                                pm2.5:"+ obj.pm);
+                                人數: "+ obj.count+ "人\
+                                溫度: "+ obj.temp+ "℃\
+                                濕度: "+ obj.humi+ "％\
+                                pm2.5:"+ obj.pm)+ "μg/㎥";
                             btn_round.width = 1;
                             btn_round.height = 0.6;
                             btn_round.color = "white";

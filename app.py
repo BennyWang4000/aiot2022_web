@@ -53,7 +53,7 @@ humi = 0.0
 #         {'temp': temp, 'humi': humi}))
 @socketio.on('all')
 def emit_all(count, temp, humi, pm):
-    socketio.emit(json.dumps({
+    socketio.emit('all', json.dumps({
         'count': count,
         'temp': temp,
         'humi': humi,

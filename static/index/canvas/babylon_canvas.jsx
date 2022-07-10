@@ -176,7 +176,10 @@ function Baylon_canvas() {
                         btn_round.height = 0.4;
                         btn_round.color = "white";
                         btn_round.fontSize = 70;
-                        btn_round.background = "green";
+                        btn_round.background = "green";                        
+                        btn_light.onPointerUpObservable.add(function () {
+                            alert("Please wait");
+                        });
                         texture_round.addControl(btn_round);
                     
                         // var plane_loading = BABYLON.Mesh.CreatePlane("plane_loading", 300, 0, scene);

@@ -220,6 +220,7 @@ function Baylon_canvas() {
 
                         socket.on('all', function (data) {
                             var obj = JSON.parse(data)
+                            console.log(data);
                             texture_round.removeControl(btn_round)
                             btn_round = BABYLON.GUI.Button.CreateSimpleButton(
                                 "but3", "籃球場內\

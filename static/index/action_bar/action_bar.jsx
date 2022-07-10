@@ -8,11 +8,11 @@ function Action_bar() {
                 <div className='action_title_ctnr'>
                     <div className='action_title'>世壯運場館資訊站</div>
                 </div>
-                <ul className='action_nav_ctnr'>
+                {/* <ul className='action_nav_ctnr'>
                     <li style={{ display: "inline" }}><a className='action_nav_btn'>Court</a></li>
                     <li style={{ display: "inline" }}><a className='action_nav_btn'>Info</a></li>
                     <li style={{ display: "inline" }}><a className='action_nav_btn'>About</a></li>
-                </ul>
+                </ul> */}
             </div>
         </div >
     )

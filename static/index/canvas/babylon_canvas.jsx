@@ -177,7 +177,7 @@ function Baylon_canvas() {
                         btn_round.color = "white";
                         btn_round.fontSize = 70;
                         btn_round.background = "green";                        
-                        btn_light.onPointerUpObservable.add(function () {
+                        btn_round.onPointerUpObservable.add(function () {
                             alert("Please wait");
                         });
                         texture_round.addControl(btn_round);

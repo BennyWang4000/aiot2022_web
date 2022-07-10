@@ -235,7 +235,10 @@ function Baylon_canvas() {
                             btn_round.height = 0.6;
                             btn_round.color = "white";
                             btn_round.fontSize = 70;
-                            btn_round.background = "green";
+                            btn_round.background = "green";                        
+                            btn_round.onPointerUpObservable.add(function () {
+                                alert(data);
+                            });
                             texture_round.addControl(btn_round);
 
                         });

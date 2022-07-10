@@ -237,7 +237,7 @@ function Baylon_canvas() {
                             btn_round.fontSize = 70;
                             btn_round.background = "green";                        
                             btn_round.onPointerUpObservable.add(function () {
-                                alert(data);
+                                alert(data.toString());
                             });
                             texture_round.addControl(btn_round);
 

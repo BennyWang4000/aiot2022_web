@@ -85,11 +85,10 @@ def emit_count(count):
 def setTempHumi():
     request_data = request.get_json()
     if request_data['password'] == 'nutcadmin5566':
-        count = 80 + random.randint(-10, 10)
+        count = request_data['count']
         temp = request_data['temp']
         humi = request_data['humi']
         pm = request_data['pm']
-        count = request_data['count']
         emit_all(count, temp, humi, pm)
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(now)
@@ -99,8 +98,8 @@ def setTempHumi():
             'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
         connection.commit()
 
-        cursor.execute(f'select * from Stadium')
-        print(cursor.fetchall())
+        # cursor.execute(f'select * from Stadium')
+        # print(cursor.fetchall())
 
         return jsonify({'code': 200})
     else:

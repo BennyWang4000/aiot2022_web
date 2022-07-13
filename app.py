@@ -32,14 +32,14 @@ database = 'test_database'
 username = 'root'
 password = '050610AIoT'
 
-# print("connecting.......")
-# connection = mysql.connector.connect(
-#     host=server,
-#     database=database,
-#     user=username,
-#     password=password)
-# cursor = connection.cursor()
-# print("connected!")
+print("connecting.......")
+connection = mysql.connector.connect(
+    host=server,
+    database=database,
+    user=username,
+    password=password)
+cursor = connection.cursor()
+print("connected!")
 
 
 temp = 0.0
@@ -92,16 +92,15 @@ def setTempHumi():
         count = request_data['count']
         emit_all(count, temp, humi, pm)
         tz = pytz.timezone('Asia/Taipei')
-        now = datetime.datetime.now().replace(tzinfo=tz).strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
         print(now)
         sql = 'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)'
         sql = sql.replace("'", '')
 
-        print(now)
         
-        # cursor.execute(
-        #     'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
-        # connection.commit()
+        cursor.execute(
+            'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
+        connection.commit()
 
         # cursor.execute(f'select * from Stadium')
         # print(cursor.fetchall())

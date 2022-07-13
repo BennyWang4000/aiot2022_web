@@ -11,6 +11,7 @@ import json
 
 import datetime
 import pandas as pd
+import pytz
 import mysql.connector
 
 from views.status.status import app_status
@@ -65,7 +66,6 @@ def emit_all(count, temp, humi, pm):
 def emit_temp(temp):
     socketio.emit('temp', temp)
 
-
 @socketio.on('humi')
 def emit_humi(humi):
     socketio.emit('humi', humi)
@@ -85,15 +85,20 @@ def emit_count(count):
 def setTempHumi():
     request_data = request.get_json()
     if request_data['password'] == 'nutcadmin5566':
-        count = request_data['count']
+        count = 80 + random.randint(-10, 10)
         temp = request_data['temp']
         humi = request_data['humi']
         pm = request_data['pm']
+        count = request_data['count']
         emit_all(count, temp, humi, pm)
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        tz = pytz.timezone('Asia/Taipei')
+        now = datetime.datetime.now().replace(tzinfo=tz).strftime("%Y-%m-%d %H:%M:%S")
         print(now)
         sql = 'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)'
         sql = sql.replace("'", '')
+
+        print(now)
+        
         cursor.execute(
             'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
         connection.commit()

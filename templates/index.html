@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <title>世壯運場館資訊站</title>
     <link rel="stylesheet" href="static/index/index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.js"
         integrity="sha512-ttqbKrGZiTtSLguBZ2xNvZrhUv02IO/TRq5U6TG5TK90wbaXWup5kIJ1A1tLzjOk5Mea/G4seVNrU+lwTLfAzA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"
-        integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"
+        integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -39,15 +39,19 @@
     </script> -->
 
     <div id="btn_ctnr"></div>
-    <script>
+    <!-- <script>
         window.intergramId = "1220350432"
+        // window.interServer = "https://api.telegram.org/bot5311243549:AAEEpuJrjdoTaBR2Y61GEXX2qF1mLr2jlFM/setWebhook?url=https://86dc-59-126-118-189.jp.ngrok.io/webhooks/telegram/webhook/hook"
+        // window.intergramServer = "https://86dc-59-126-118-189.jp.ngrok.io/webhooks/telegram/webhook"
         window.intergramCustomizations = {
             titleClosed: 'ChatBot',
             titleOpen: 'ChatBot',
         } 
     </script>
     <div id="info"></div>
-    <script id="intergram" type="text/javascript" src="https://www.intergram.xyz/js/widget.js"></script>
+    <script id="intergram" type="text/javascript"
+        src="https://86dc-59-126-118-189.jp.ngrok.io/webhooks/telegram/webhook/js/widget.js"></script> -->
+    <!-- <script id="intergram" type="text/javascript" src="https://www.intergram.xyz/js/widget.js"></script> -->
     <!-- <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}">
         </script> -->
     <script type="text/javascript" src="../static/bundle.js"></script>

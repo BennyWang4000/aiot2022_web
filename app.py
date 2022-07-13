@@ -32,14 +32,14 @@ database = 'test_database'
 username = 'root'
 password = '050610AIoT'
 
-print("connecting.......")
-connection = mysql.connector.connect(
-    host=server,
-    database=database,
-    user=username,
-    password=password)
-cursor = connection.cursor()
-print("connected!")
+# print("connecting.......")
+# connection = mysql.connector.connect(
+#     host=server,
+#     database=database,
+#     user=username,
+#     password=password)
+# cursor = connection.cursor()
+# print("connected!")
 
 
 temp = 0.0
@@ -99,9 +99,9 @@ def setTempHumi():
 
         print(now)
         
-        cursor.execute(
-            'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
-        connection.commit()
+        # cursor.execute(
+        #     'insert into Stadium(set_time, people_flow, temp, humidity, air_quality) values (%s, %s, %s, %s, %s)', (now, count, temp, humi, pm))
+        # connection.commit()
 
         # cursor.execute(f'select * from Stadium')
         # print(cursor.fetchall())

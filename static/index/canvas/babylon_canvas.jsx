@@ -234,7 +234,7 @@ function Baylon_canvas() {
                             btn_round.width = 1;
                             btn_round.height = 0.6;
                             btn_round.color = "white";
-                            btn_round.fontSize = 70;
+                            btn_round.fontSize = 90;
                             btn_round.background = "green";                        
                             // btn_round.onPointerUpObservable.add(function () {
                             //     alert(data.toString());
